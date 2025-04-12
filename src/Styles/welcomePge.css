@@ -28,11 +28,20 @@ h1 {
     text-shadow: 5px 5px 10px rgba(255, 255, 255, 0.5);
 }
 
+/* Add media query for mobile screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 4rem; /* Adjust size for mobile screens */
+        text-shadow: 3px 3px 8px rgba(255, 255, 255, 0.5); /* Slightly reduced shadow */
+    }
+}
+
 p {
     font-size: 2rem;
     margin: 0;
     padding: 0;
 }
+
 @keyframes vibrate {
     0%, 95% { transform: translateX(0); } /* Stays still for most of the time */
     96% { transform: translateX(-2px); } 
@@ -40,15 +49,13 @@ p {
     98% { transform: translateX(-2px); } 
     99% { transform: translateX(2px); } 
     100% { transform: translateX(0); } /* Returns to normal */
-  }
-  
-  .vibrating-button {
-    animation: vibrate 3s infinite ease-in-out; /* Smooth transition */
-  }
-  
+}
 
-  .bouncing-text {
+.vibrating-button {
+    animation: vibrate 3s infinite ease-in-out; /* Smooth transition */
+}
+
+.bouncing-text {
     animation: bounce 1s ease-in-out infinite;
     animation-delay: 4s;
-  }
-  
+}
