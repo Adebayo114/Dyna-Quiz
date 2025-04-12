@@ -1,0 +1,107 @@
+.language-selection {
+  text-align: center;
+  padding: 20px;
+}
+
+.language-selection h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.language-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+.language-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 400px; /* Fixed size for desktop version */
+  height: 400px; /* Fixed size for desktop version */
+  font-size: 22px; /* Adjusted font size */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+  padding: 15px;
+  margin: 10px; /* Add some margin between buttons */
+}
+
+.language-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.language-button svg {
+  margin-bottom: 10px;
+}
+
+.encouragement-hint {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  border-radius: 5px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.encouragement-hint.slide-in {
+  display: block;
+  opacity: 1;
+}
+
+.encouragement-hint.slide-out {
+  display: none;
+}
+
+.hint-icon {
+  margin-right: 10px;
+}
+
+/* Responsive Design for Tablets and Smaller Screens */
+@media (max-width: 768px) {
+  .language-buttons {
+    flex-direction: column; /* Stack the buttons vertically */
+    gap: 20px;
+  }
+
+  .language-button {
+    width: 80%; /* Make buttons responsive for tablet */
+    height: auto; /* Allow height to adjust automatically */
+    font-size: 18px; /* Adjust font size for tablet */
+  }
+
+  .encouragement-hint {
+    font-size: 1rem; /* Slightly smaller font size for hint */
+    padding: 8px 15px;
+  }
+}
+
+/* Responsive Design for Very Small Screens (Mobile) */
+@media (max-width: 480px) {
+  .language-buttons {
+    gap: 10px; /* Smaller gap between buttons */
+  }
+
+  .language-button {
+    width: 90%; /* Make buttons even smaller for mobile */
+    height: auto; /* Allow height to adjust automatically */
+    font-size: 16px; /* Smaller font size for mobile */
+  }
+
+  .encouragement-hint {
+    font-size: 0.9rem; /* Smaller font size for very small screens */
+    padding: 7px 12px;
+  }
+}

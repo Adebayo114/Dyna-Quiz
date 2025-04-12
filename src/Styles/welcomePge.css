@@ -1,0 +1,54 @@
+.container {
+    text-align: center;
+}
+
+button {
+    background-color: #4CAF50;
+    /* Green */
+    border: none;
+    color: white;
+    border-radius: .5rem;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-top: 3rem;
+}
+
+button:hover {
+    background-color: #45a049;
+    /* Darker green */
+}
+
+h1 {
+    font-size: 6.5rem;
+    text-shadow: 5px 5px 10px rgba(255, 255, 255, 0.5);
+}
+
+p {
+    font-size: 2rem;
+    margin: 0;
+    padding: 0;
+}
+@keyframes vibrate {
+    0%, 95% { transform: translateX(0); } /* Stays still for most of the time */
+    96% { transform: translateX(-2px); } 
+    97% { transform: translateX(2px); } 
+    98% { transform: translateX(-2px); } 
+    99% { transform: translateX(2px); } 
+    100% { transform: translateX(0); } /* Returns to normal */
+  }
+  
+  .vibrating-button {
+    animation: vibrate 3s infinite ease-in-out; /* Smooth transition */
+  }
+  
+
+  .bouncing-text {
+    animation: bounce 1s ease-in-out infinite;
+    animation-delay: 4s;
+  }
+  

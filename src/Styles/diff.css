@@ -1,0 +1,48 @@
+.difficulty-selection {
+    text-align: center;
+    padding: 20px;
+}
+
+.difficulty-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.difficulty-buttons button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.8); }
+    100% { box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+}
+
+.difficulty-buttons button {
+    width: 300px;
+    height: 120px;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
+    border-radius: 8px;
+    transition: 0.3s;
+    animation: glow 1.5s infinite alternate;
+    background-color: #333; /* Default color for button */
+}
+
+.difficulty-buttons button:first-child {
+    background-color: #00FF00; /* Neon Green for Beginner */
+}
+
+.difficulty-buttons button:nth-child(2) {
+    background-color: #FFD700; /* Gold for Intermediate */
+}
+
+.difficulty-buttons button:last-child {
+    background-color: #FF4500; /* Bright Orange-Red for Expert */
+}
