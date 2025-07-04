@@ -9,8 +9,8 @@ const Beginners = () => {
   const { language, difficulty } = useParams();
   const navigate = useNavigate();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [score, setScore] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [score, setScore] = useState(null); // use null to delay score calc
 
   const questionBank = {
     beginner: beginnerQuestions,
@@ -22,50 +22,54 @@ const Beginners = () => {
 
   if (!questions) return <p>No questions found for this language and difficulty.</p>;
 
-  const handleNextQuestion = () => {
-    if (selectedAnswer) {
-      if (selectedAnswer === questions[currentQuestionIndex].answer) {
-        setScore(score + 1);
-      }
-      setSelectedAnswer(null);
-    }
+  const handleAnswerSelection = (answer) => {
+    const updatedAnswers = [...selectedAnswers];
+    updatedAnswers[currentQuestionIndex] = answer;
+    setSelectedAnswers(updatedAnswers);
+  };
 
+  const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex((prev) => prev + 1);
+    } else {
+      // Calculate score only at the end
+      const finalScore = selectedAnswers.reduce((acc, selected, idx) => {
+        if (selected === questions[idx].answer) return acc + 1;
+        return acc;
+      }, 0);
+      setScore(finalScore);
     }
   };
 
   const handlePrevQuestion = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setCurrentQuestionIndex((prev) => prev - 1);
     }
   };
 
-  const handleAnswerSelection = (answer) => {
-    setSelectedAnswer(answer);
-  };
-
-  // Navigate back to the language selection page
   const handleBackToSelect = () => {
-    navigate("/"); // Adjust the route as needed (e.g., to the language selection page)
+    navigate("/");
   };
 
-  // Show the score and "Back to Select" button after the quiz is complete
-  const isQuizCompleted = currentQuestionIndex === questions.length - 1;
+  const isQuizCompleted = score !== null;
 
   return (
     <div className="quiz-container">
-      <h1 className="quiz-header">{language.toUpperCase()} - {difficulty.toUpperCase()} Quiz</h1>
-      
+      <h1 className="quiz-header">
+        {language.toUpperCase()} - {difficulty.toUpperCase()} Quiz
+      </h1>
+
       {!isQuizCompleted ? (
         <div className="question-card">
           <h3 className="question-text">{questions[currentQuestionIndex].question}</h3>
-          
+
           <ul className="options-list">
             {questions[currentQuestionIndex].options.map((option, index) => (
               <li
                 key={index}
-                className={`option-item ${selectedAnswer === option ? 'selected' : ''}`}
+                className={`option-item ${
+                  selectedAnswers[currentQuestionIndex] === option ? "selected" : ""
+                }`}
                 onClick={() => handleAnswerSelection(option)}
               >
                 {option}
@@ -80,20 +84,22 @@ const Beginners = () => {
       )}
 
       <div className="nav-buttons">
-        <button 
+        <button
           className="nav-button"
-          onClick={handlePrevQuestion} 
-          disabled={currentQuestionIndex === 0 || isQuizCompleted}
+          onClick={handlePrevQuestion}
+          disabled={currentQuestionIndex === 0}
         >
           Previous
         </button>
-        <button
-          className="nav-button"
-          onClick={handleNextQuestion}
-          disabled={currentQuestionIndex === questions.length - 1 || isQuizCompleted}
-        >
-          Next
-        </button>
+        {!isQuizCompleted && (
+          <button
+            className="nav-button"
+            onClick={handleNextQuestion}
+            disabled={selectedAnswers[currentQuestionIndex] == null}
+          >
+            {currentQuestionIndex === questions.length - 1 ? "Finish" : "Next"}
+          </button>
+        )}
       </div>
 
       {isQuizCompleted && (

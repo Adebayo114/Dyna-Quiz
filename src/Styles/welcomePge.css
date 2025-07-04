@@ -1,61 +1,142 @@
 .container {
     text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #121212 0%, #1e1e1e 100%);
+    border-radius: 1.5rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 button {
-    background-color: #4CAF50;
-    /* Green */
+    background: linear-gradient(145deg, #4CAF50, #3d8b40);
     border: none;
     color: white;
-    border-radius: .5rem;
-    padding: 15px 32px;
+    border-radius: 0.75rem;
+    padding: 18px 40px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 30px;
+    font-size: 1.8rem;
+    font-weight: 600;
     margin: 4px 2px;
     cursor: pointer;
     margin-top: 3rem;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
 }
 
 button:hover {
-    background-color: #45a049;
-    /* Darker green */
+    background: linear-gradient(145deg, #45a049, #367d39);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(69, 160, 73, 0.6);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 20px rgba(69, 160, 73, 0.8);
 }
 
 h1 {
     font-size: 6.5rem;
-    text-shadow: 5px 5px 10px rgba(255, 255, 255, 0.5);
-}
-
-/* Add media query for mobile screens */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 4rem; /* Adjust size for mobile screens */
-        text-shadow: 3px 3px 8px rgba(255, 255, 255, 0.5); /* Slightly reduced shadow */
-    }
+    background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 p {
     font-size: 2rem;
     margin: 0;
     padding: 0;
+    color: #e0e0e0;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 2rem;
 }
 
+/* Enhanced Vibrate Animation */
 @keyframes vibrate {
-    0%, 95% { transform: translateX(0); } /* Stays still for most of the time */
-    96% { transform: translateX(-2px); } 
-    97% { transform: translateX(2px); } 
-    98% { transform: translateX(-2px); } 
-    99% { transform: translateX(2px); } 
-    100% { transform: translateX(0); } /* Returns to normal */
+    0%, 90% { transform: translateX(0); }
+    92% { transform: translateX(-3px) rotate(-1deg); } 
+    94% { transform: translateX(3px) rotate(1deg); } 
+    96% { transform: translateX(-3px) rotate(-1deg); } 
+    98% { transform: translateX(3px) rotate(1deg); } 
+    100% { transform: translateX(0) rotate(0); }
 }
 
 .vibrating-button {
-    animation: vibrate 3s infinite ease-in-out; /* Smooth transition */
+    animation: vibrate 4s infinite ease-in-out;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
 }
 
 .bouncing-text {
-    animation: bounce 1s ease-in-out infinite;
+    display: inline-block;
+    animation: bounce 1.5s ease-in-out infinite;
     animation-delay: 4s;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    h1 {
+        font-size: 4rem;
+        line-height: 1.2;
+    }
+    
+    button {
+        padding: 16px 32px;
+        font-size: 1.5rem;
+    }
+    
+    p {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    button {
+        padding: 14px 28px;
+        font-size: 1.3rem;
+        width: 100%;
+    }
+    
+    p {
+        font-size: 1.4rem;
+    }
 }

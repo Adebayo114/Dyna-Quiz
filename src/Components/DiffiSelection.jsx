@@ -3,29 +3,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../Styles/diff.css";
 
 const difficulties = [
-  { level: "Beginner", color: "#00FF00" }, // Neon Green
-  { level: "Intermediate", color: "#FFD700" }, // Gold
-  { level: "Expert", color: "#FF4500" } // Bright Orange-Red
+  { level: "beginner", label: "🥉 Bronze", color: "#cd7f32" },
+  { level: "intermediate", label: "🥈 Silver", color: "#c0c0c0" },
+  { level: "expert", label: "🥇 Champion", color: "#ffd700" }
 ];
+
 
 const DiffiSelection = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const selectedLang = queryParams.get("lang"); // Get selected language from URL
+  const selectedLang = queryParams.get("lang");
 
-// In DiffiSelection.jsx
-const handleSelectDifficulty = (level) => {
-  // Debug before navigation
-  console.log("Navigating with:", {
-    lang: selectedLang,
-    difficulty: level.toLowerCase()
-  });
-
-  navigate(`/questions/${level.toLowerCase()}/${selectedLang}`);
-  // Debug after navigation
-  console.log("Selected lang before navigation:", selectedLang);
-};
+  const handleSelectDifficulty = (level) => {
+   navigate(`/questions/${level}/${selectedLang}`);
+  };
 
   return (
     <div className="difficulty-selection">
@@ -37,7 +29,7 @@ const handleSelectDifficulty = (level) => {
             style={{ backgroundColor: diff.color }}
             onClick={() => handleSelectDifficulty(diff.level)}
           >
-            {diff.level}
+            {diff.label}
           </button>
         ))}
       </div>
